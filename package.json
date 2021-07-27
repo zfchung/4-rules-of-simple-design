@@ -6,7 +6,9 @@
   "author": "ZF Chung (Zack) <zfchung1@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "ts-node ./src",
+    "start": "node ./dist"
   },
   "dependencies": {
     "typescript": "^4.3.5"
