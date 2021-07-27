@@ -9,7 +9,8 @@
     "build": "tsc",
     "dev": "ts-node ./src",
     "start": "node ./dist",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier --write ./src"
   },
   "jest": {
     "preset": "ts-jest",
