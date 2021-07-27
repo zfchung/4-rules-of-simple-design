@@ -5,6 +5,9 @@
   "repository": "https://github.com/zfchung/node-project-template.git",
   "author": "ZF Chung (Zack) <zfchung1@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "typescript": "^4.3.5"
   }
