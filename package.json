@@ -10,6 +10,10 @@
     "dev": "ts-node ./src",
     "start": "node ./dist"
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "typescript": "^4.3.5"
   },
