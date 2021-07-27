@@ -1,0 +1,8 @@
+{
+  "name": "node-project-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zfchung/node-project-template.git",
+  "author": "ZF Chung (Zack) <zfchung1@gmail.com>",
+  "license": "MIT"
+}
