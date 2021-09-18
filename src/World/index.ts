@@ -11,4 +11,10 @@ export class World {
     const newLivingCell = new LivingCell();
     return newLivingCell.positionAt(coordinateX, coordinateY);
   }
+
+  isEmpty(){
+    if(this.livingCells().count == 0){
+      return true;
+    } else return false;
+  }
 }
