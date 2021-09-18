@@ -1,14 +1,13 @@
-import { World } from '../index';
-
-// describe('Test World class', () => {
-//   it('should have no cells in a New world', () => {
-//     const world = new World();
-//     expect(world.countOf.Cell).toBe(0);
-//   });
-// });
+import {LivingCell} from './index'
 
 describe('Test Living Cell class', () => {
-  it('should die when there are 0 neighbour', () => {
-    expect(LivingCell.positionAt(1,1).state).toEqual("dead");
-  })
+
+  it('should have location information', () => {
+    const cell = new LivingCell();
+    expect(cell.positionAt(1, 1)).toEqual([1, 1]);
+  });
+
+  // it('should die when there are 0 neighbour', () => {
+  //   expect(LivingCell.positionAt(1,1).state).toEqual("dead");
+  // })
 })
