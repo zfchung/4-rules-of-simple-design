@@ -6,9 +6,9 @@ describe("Test World class", () => {
     expect(world.isEmpty()).toEqual(true);
   })
 
-  it("should be able to add new a cell", () => {
+  it("should be not empty after adding a new cell", () => {
     let world = new World();
     world.setLivingAt(1,1);
-    expect(world.livingCells().count).toEqual(1);
+    expect(world.isEmpty()).toEqual(false);
   })
 })
