@@ -1,12 +1,14 @@
-import { LivingCell } from "../LivingCell";
+import {LivingCell} from "../LivingCell";
 
 export class World {
-  livingCells () {
+  livingCells() {
     return {
-      count(){
-        return 0;
-      }
+      count : LivingCell.countInstance
     }
   }
 
+  setLivingAt(coordinateX: number, coordinateY: number) {
+    const newLivingCell = new LivingCell();
+    return newLivingCell.positionAt(coordinateX, coordinateY);
+  }
 }
