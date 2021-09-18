@@ -1,11 +1,13 @@
+import {Location} from "../Location";
+
 export class LivingCell {
   static countInstance: number = 0;
-
+  
   constructor() {
     LivingCell.countInstance++;
   }
 
-  positionAt(coordinateX: number, coordinateY: number) {
-    return [coordinateX, coordinateY];
+  positionAt(location: number[]) {
+    return location
   }
 }

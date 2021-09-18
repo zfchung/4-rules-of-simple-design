@@ -1,15 +1,16 @@
 import {LivingCell} from "../LivingCell";
 
 export class World {
+
   livingCells() {
     return {
       count : LivingCell.countInstance
     }
   }
 
-  setLivingAt(coordinateX: number, coordinateY: number) {
+  setLivingAt(location: number[]) {
     const newLivingCell = new LivingCell();
-    newLivingCell.positionAt(coordinateX, coordinateY);
+    newLivingCell.positionAt(location);
     return newLivingCell;
   }
 
@@ -19,8 +20,8 @@ export class World {
     } else return false;
   }
 
-  aliveAt(coordinateX: number, coordinateY: number){
-    const instanceAtLocationExists = this.setLivingAt(coordinateX, coordinateY) instanceof LivingCell;
+  aliveAt(location: number[]){
+    const instanceAtLocationExists = this.setLivingAt(location) instanceof LivingCell;
     return instanceAtLocationExists;
   }
 }
