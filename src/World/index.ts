@@ -20,6 +20,7 @@ export class World {
   }
 
   aliveAt(coordinateX: number, coordinateY: number){
-    return this.setLivingAt(coordinateX, coordinateY) instanceof LivingCell;
+    const instanceAtLocationExists = this.setLivingAt(coordinateX, coordinateY) instanceof LivingCell;
+    return instanceAtLocationExists;
   }
 }
