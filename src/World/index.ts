@@ -9,12 +9,17 @@ export class World {
 
   setLivingAt(coordinateX: number, coordinateY: number) {
     const newLivingCell = new LivingCell();
-    return newLivingCell.positionAt(coordinateX, coordinateY);
+    newLivingCell.positionAt(coordinateX, coordinateY);
+    return newLivingCell;
   }
 
   isEmpty(){
     if(this.livingCells().count == 0){
       return true;
     } else return false;
+  }
+
+  aliveAt(coordinateX: number, coordinateY: number){
+    return this.setLivingAt(coordinateX, coordinateY) instanceof LivingCell;
   }
 }

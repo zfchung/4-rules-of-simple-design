@@ -11,4 +11,10 @@ describe("Test World class", () => {
     world.setLivingAt(1,1);
     expect(world.isEmpty()).toEqual(false);
   })
+
+  it("should be able to add new cells", () => {
+    let world = new World();
+    world.setLivingAt(1,1);
+    expect(world.aliveAt(1,1)).toEqual(true);
+  })
 })
