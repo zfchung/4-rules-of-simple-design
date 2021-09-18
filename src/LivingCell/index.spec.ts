@@ -5,7 +5,7 @@ describe('Test Living Cell class', () => {
 
   it('should have location information', () => {
     const cell = new LivingCell();
-    let location = new Location(1,1).coordinate();
+    let location = new Location(1,1).coordinate;
     expect(cell.positionAt(location)).toEqual([1, 1]);
   });
 
