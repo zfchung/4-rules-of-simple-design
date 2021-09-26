@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Jetbrains folder
+.idea
+
+# MacOS
+.DS_Store
+
