@@ -86,3 +86,46 @@ class Location {
 ```
 
 </details>
+
+### Testing State vs Testing Behavior
+
+<details>
+<summary>Click to expand!</summary>
+Focus on the behavior rather than the state of the objects. It is about only building the things that are absolutely
+needed and only at the time they are needed. This way, we end up with a system that has just enough code to support our
+use cases.
+
+What behaviour of my system require this? -
+
+```javascript
+it("should be empty when initialized", () => {
+  let world = new World();
+  expect(world.isEmpty()).toEqual(true);
+});
+```
+
+The empty world should tick into another empty world.
+
+```javascript
+it("should stays empty after a tick", () => {
+  // Write test
+})
+```
+
+Since the test dictates that we start with an empty world, we should probably postpone this test and make sure that a
+new world is empty, so we can write the above (origin) test
+
+```javascript
+it("should be empty when initialized", () => {
+  let world = new World();
+  expect(world.isEmpty()).toEqual(true);
+});
+
+it("should stays empty after a tick", () => {
+  let world = new World();
+  const nextWorld = world.tick();
+  expect(nextWorld.isEmpty()).toEqual(true);
+})
+```
+
+</details>
