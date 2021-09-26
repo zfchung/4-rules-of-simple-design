@@ -46,6 +46,9 @@ we are flying through our TDD cycle, take a moment to make sure that we are actu
 
 ### Duplication of Knowledge about Topology
 
+<details>
+<summary>Click to expand!</summary>
+
 ```javascript
 class World {
   setLivingAt(coordinateX: number, coordinateY: number) {
@@ -65,3 +68,21 @@ export class World {
   }
 }
 ```
+
+</details>
+
+### Behavior Attractors
+
+<details>
+<summary>Click to expand!</summary>
+
+```javascript
+class Location {
+  neighbours() {
+    let neighbourCoordinateList = getNeighbourCoordinates(this.coordinateX, this.coordinateY);
+    return neighbourCoordinateList;
+  }
+}
+```
+
+</details>
