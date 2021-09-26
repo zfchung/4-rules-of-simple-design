@@ -4,7 +4,7 @@ export class World {
 
   livingCells() {
     return {
-      count : LivingCell.countInstance
+      count: LivingCell.countInstance
     }
   }
 
@@ -14,14 +14,18 @@ export class World {
     return newLivingCell;
   }
 
-  isEmpty(){
-    if(this.livingCells().count == 0){
+  isEmpty() {
+    if (this.livingCells().count == 0) {
       return true;
     } else return false;
   }
 
-  aliveAt(location: number[]){
+  aliveAt(location: number[]) {
     const instanceAtLocationExists = this.setLivingAt(location) instanceof LivingCell;
     return instanceAtLocationExists;
+  }
+
+  tick() {
+    return new World();
   }
 }
