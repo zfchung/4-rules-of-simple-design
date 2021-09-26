@@ -10,17 +10,22 @@ export class Location {
   }
 
   neighbours() {
-    // calculate a list of locations that are considered neighbors
-    let coordinateList: number[][] = [];
-    coordinateList.push([this.coordinateX - 1, this.coordinateY - 1]);
-    coordinateList.push([this.coordinateX, this.coordinateY - 1]);
-    coordinateList.push([this.coordinateX + 1, this.coordinateY - 1]);
-    coordinateList.push([this.coordinateX - 1, this.coordinateY]);
-    coordinateList.push([this.coordinateX + 1, this.coordinateY]);
-    coordinateList.push([this.coordinateX - 1, this.coordinateY + 1]);
-    coordinateList.push([this.coordinateX, this.coordinateY + 1]);
-    coordinateList.push([this.coordinateX + 1, this.coordinateY + 1]);
-    return coordinateList;
+    let neighbourCoordinateList = getNeighbourCoordinates(this.coordinateX, this.coordinateY);
+    return neighbourCoordinateList;
   }
 
+}
+
+function getNeighbourCoordinates(coordinateX: number, coordinateY: number) {
+  let coordinateList = [];
+  for (let x = (coordinateX - 1); x <= (coordinateX + 1); x++) {
+    for (let y = (coordinateY - 1); y <= (coordinateY + 1); y++) {
+      let neighbourCoordinate = [x, y];
+      if (x !== 1 || y !== 1) {
+        coordinateList.push(neighbourCoordinate);
+      }
+    }
+  }
+
+  return coordinateList;
 }
