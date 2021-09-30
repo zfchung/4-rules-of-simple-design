@@ -2,16 +2,30 @@ export class Location {
   coordinateX: number;
   coordinateY: number;
   coordinate: number[];
+  locations: any[];
+  static allLoc: any;
 
   constructor(coordinateX: number, coordinateY: number) {
     this.coordinateX = coordinateX;
     this.coordinateY = coordinateY;
-    this.coordinate = [this.coordinateX, this.coordinateY];
+    this.coordinate = this.getCoordinate();
+    this.locations = [];
+    Location.allLoc = this.allLocations;
+  }
+
+  getCoordinate() {
+    let coordinate = [this.coordinateX, this.coordinateY];
+    this.locations.push(coordinate);
+    return coordinate;
   }
 
   neighbours() {
     let neighbourCoordinateList = getNeighbourCoordinates(this.coordinateX, this.coordinateY);
     return neighbourCoordinateList;
+  }
+
+  get allLocations() {
+    return this.locations;
   }
 
 }
