@@ -1,7 +1,5 @@
 ## Examples
 
-Notes taken from Corey Haines' <i>Understanding 4 Rules of Simple Design</i>. Practicing examples using TypeScript.
-
 ### Test Names Should Influence Object's API
 
 <details>
@@ -131,27 +129,3 @@ it("should stays empty after a tick", () => {
 ```
 
 </details>
-
-### Don't Have Tests Depend on Previous Tests
-
-```javascript
-it("should stays empty after a tick", () => {
-  let world = new World();
-  const nextWorld = world.tick();
-  expect(nextWorld.isEmpty()).toEqual(true);
-})
-```
-
-How do we know that a newly-initialized World is empty? The test name indicates that we are starting with an empty
-world, but the test code does not specify this explicitly. This Test implicitly depends on the validity of a different,
-previous test: there is an assumption here that new worlds are empty. This causes a subtle, but important, problem; that
-lack of explicitness, combined with the coupling to the previous test, makes this test contribute to a fragile test
-suite.
-
-```javascript
-
-```
-
-Ask for an empty world explicitly.
-
-Guideline: There must be an explicitly named builder method on the class to create an object in a specific, valid state.

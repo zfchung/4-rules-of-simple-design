@@ -1,11 +1,10 @@
 import {LivingCell} from "../LivingCell";
-import {Location} from "../Location";
 
 export class World {
 
   livingCells() {
     return {
-      count: LivingCell.countInstance,
+      count: LivingCell.countInstance
     }
   }
 
@@ -28,12 +27,5 @@ export class World {
 
   tick() {
     return new World();
-  }
-
-  empty() {
-    if (this.livingCells().count > 0) {
-      console.log(Location.allLoc);
-    }
-
   }
 }
