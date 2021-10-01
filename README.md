@@ -131,6 +131,7 @@ it("should stays empty after a tick", () => {
 </details>
 
 ### Don't Have Tests Depend on Previous Tests
+
 <details>
 <summary>Click to expand!</summary>
 
@@ -159,5 +160,37 @@ it("should stays empty after a tick", () => {
 Ask for an empty world explicitly.
 
 Guideline: There must be an explicitly named builder method on the class to create an object in a specific, valid state.
+
+</details>
+
+### Breaking Abstraction Level
+
+<details>
+<summary>Click to expand!</summary>
+
+```javascript
+it("should be not empty after adding a new cell", () => {
+  let world = new World();
+  let location = new Location(1, 1).coordinate;
+  world.setLivingAt(location);
+  expect(world.isEmpty).toEqual(false);
+})
+```
+
+In the example above, we are testing the behavior of the world, but we are including details that it isn't concerned
+with. By typing the test to the implementation of the 2 dimensions (1,1) rather than the Location abstraction, we are
+laying the groundwork for fragile tests. Change the topology (e.g. to 3 dimensions) and the tests fail.
+
+To hide the details of the topology from the world object is to use a stand-in, a test double for the location object.
+This can be as simple as creating a new, plain object.
+
+```javascript
+it("should be not empty after adding a new cell", () => {
+  let world = new World();
+  const dummyLocation = [1, 1];
+  world.setLivingAt(dummyLocation);
+  expect(world.isEmpty).toEqual(false);
+})
+```
 
 </details>
