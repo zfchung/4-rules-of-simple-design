@@ -131,6 +131,8 @@ it("should stays empty after a tick", () => {
 </details>
 
 ### Don't Have Tests Depend on Previous Tests
+<details>
+<summary>Click to expand!</summary>
 
 ```javascript
 it("should stays empty after a tick", () => {
@@ -147,9 +149,15 @@ lack of explicitness, combined with the coupling to the previous test, makes thi
 suite.
 
 ```javascript
-
+it("should stays empty after a tick", () => {
+  let world = new World().empty;
+  const nextWorld = world.tick();
+  expect(nextWorld.isEmpty).toEqual(true);
+});
 ```
 
 Ask for an empty world explicitly.
 
 Guideline: There must be an explicitly named builder method on the class to create an object in a specific, valid state.
+
+</details>
