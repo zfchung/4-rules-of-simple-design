@@ -194,3 +194,48 @@ it("should be not empty after adding a new cell", () => {
 ```
 
 </details>
+
+### Naive Duplication
+
+```javascript
+export class Cell {
+  get aliveInNextGeneration() {
+    if (this.isAlive) {
+      return this.numberOfNeighbours == 2 || this.numberOfNeighbours == 3;
+    } else {
+      return this.numberOfNeighbours == 3
+    }
+  }
+}
+```
+
+Refactoring from above to below code by eliminating "duplication of code" without understanding the knowledge behind
+introduces confusion of the expression of the code. DRY principle states:
+> Every piece of _knowledge_ has one and only one representation
+
+Knowledge ≠ Code. Just combining code that appears similar and combining them misses the point of the DRY principle.
+
+The 3s are not the same.
+
+```javascript
+export class Cell {
+  get aliveInNextGeneration() {
+    return (this.isAlive && this.numberOfNeighbours == 2) || this.numberOfNeighbours == 3;
+  }
+}
+```
+
+After refactoring to below, we can see clearly that hte 3s represent different things. This is the power of paying close
+attention to the expressiveness of our code before blindly trying to eliminate duplication.
+
+```javascript
+export class Cell {
+  get aliveInNextGeneration() {
+    if (this.isAlive) {
+      return this.isStableNeighborhood();
+    } else {
+      return this.isGeneticallyFertileNeighbourhood();
+    }
+  }
+}
+```
