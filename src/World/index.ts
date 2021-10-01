@@ -1,21 +1,25 @@
 import {LivingCell} from "../LivingCell";
 
 export class World {
+  livingCells: any[];
 
-  livingCells() {
-    return {
-      count: LivingCell.countInstance
-    }
+  constructor() {
+    this.livingCells = []
+  }
+
+  get numberOfLivingCells() {
+    return this.livingCells.length;
   }
 
   setLivingAt(location: number[]) {
     const newLivingCell = new LivingCell();
     newLivingCell.positionAt(location);
+    this.livingCells.push(newLivingCell);
     return newLivingCell;
   }
 
   isEmpty() {
-    if (this.livingCells().count == 0) {
+    if (this.numberOfLivingCells == 0) {
       return true;
     } else return false;
   }
