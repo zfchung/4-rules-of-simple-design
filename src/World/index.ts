@@ -18,7 +18,7 @@ export class World {
     return newLivingCell;
   }
 
-  isEmpty() {
+  get isEmpty() {
     if (this.numberOfLivingCells == 0) {
       return true;
     } else return false;
@@ -31,5 +31,9 @@ export class World {
 
   tick() {
     return new World();
+  }
+
+  empty() {
+    this.livingCells.length = 0;
   }
 }
