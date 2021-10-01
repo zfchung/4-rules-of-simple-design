@@ -33,7 +33,8 @@ export class World {
     return new World();
   }
 
-  empty() {
+  get empty() {
     this.livingCells.length = 0;
+    return this;
   }
 }

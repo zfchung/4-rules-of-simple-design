@@ -15,18 +15,17 @@ describe("Test World class", () => {
       world.setLivingAt(location_1.coordinate);
       expect(world.isEmpty).toEqual(false);
       // When
-      world.empty();
+      world.empty;
       // Then
       expect(world.isEmpty).toEqual(true);
     })
   })
 
   it("should stays empty after a tick", () => {
-    let world = new World();
-    world.empty();
+    let world = new World().empty;
     const nextWorld = world.tick();
     expect(nextWorld.isEmpty).toEqual(true);
-  })
+  });
 
   it("should be not empty after adding a new cell", () => {
     let world = new World();
