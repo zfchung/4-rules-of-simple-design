@@ -1,6 +1,7 @@
 import {World} from "./index";
 import {Location} from "../Location";
-import mock = jest.mock;
+
+// jest.mock("../Location");
 
 describe("Test World class", () => {
   it("should be empty when initialized", () => {
@@ -13,7 +14,7 @@ describe("Test World class", () => {
       // Given
       let world = new World();
       let location_1 = new Location(1, 1);
-      world.setLivingAt(location_1.coordinate);
+      world.setLivingAt(location_1);
       expect(world.isEmpty).toEqual(false);
       // When
       world.empty;
@@ -28,17 +29,18 @@ describe("Test World class", () => {
     expect(nextWorld.isEmpty).toEqual(true);
   });
 
-  it("should be not empty after adding a new cell", () => {
+  fit("should be not empty after adding a new cell", () => {
     let world = new World();
-    const dummyLocation = [1,1];
-    world.setLivingAt(dummyLocation);
+    console.log(Location);
+    let location_1 = new Location(1, 1);
+    world.setLivingAt(location_1);
     expect(world.isEmpty).toEqual(false);
   })
 
-  it("should be able to add new cells", () => {
-    let world = new World();
-    const dummyLocation = [1,1];
-    world.setLivingAt(dummyLocation);
-    expect(world.aliveAt(dummyLocation)).toEqual(true);
-  })
+  // xit("should be able to add new cells", () => {
+  //   let world = new World();
+  //   const dummyLocation = [1, 1];
+  //   world.setLivingAt(dummyLocation);
+  //   expect(world.aliveAt(dummyLocation)).toEqual(true);
+  // })
 })
