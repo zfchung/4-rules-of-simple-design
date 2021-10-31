@@ -247,3 +247,95 @@ export class Cell {
 
 </details>
 
+### Procedural Polymorphism
+
+<details>
+<summary>Click to expand!</summary>
+
+```javascript
+class Cell {
+  aliveInNextGeneration() {
+    if (this.isAlive) {
+      return this.isStableNeighborhood();
+    } else {
+      return this.isGeneticallyFertileNeighbourhood();
+    }
+  }
+}
+```
+
+In the above example, we are providing a form of polymorphism with aliveInNextGeneration(). When this method is called,
+the caller can expect one of two different behaviors: either the ruleset for living cells or ruleset for dead cells.
+Which ruleset gets run is based on an internal state, hidden from the outside world. In a way, this is good; the caller
+shouldn't have to care.
+
+When we use a branching construct inside a method like this, we run into several problems. We talked about the
+expressiveness problem, but we lso have issues with changing this code. If we are going to add a state, or change rules
+around the states, we will find ourselves modifying existing code. Not just existing code, but code that is unrelated to
+the change we are making. If we add a state, why would we force ourselves to modify the code related to the other
+states? When we begin to overload concepts in our system, especially method names, we run into this "everything goes
+here" situation.
+
+In general, if statements (or other branching constructs) are imperative, procedural mechanisms. While they do provide a
+form of polymorphism, they provide a form that author call Procedural Polymorphism. It satisfies our need for selecting
+a behavior, but their procedural background leads to tightly-coupled code, joining these often unrelated behaviors
+together.
+
+Luckily, object-based and object-oriented languages provide a preferred method for polymorphism, what author calls
+Type-Based Polymorphism. The idea is one central to object-oriented design: use different types for the different
+branches. The general approach is to analyze what the branching condition is, identify the concepts, and reify them into
+first-class concepts in our system.
+
+In our example, we can take our state and raise it to types: LivingCell and DeadCell.
+
+```javascript
+class LivingCell {
+  isALiveInNextGeneration() {
+    return this.isStableNeighborhood();
+  }
+}
+
+class DeadCell {
+  isALiveInNextGeneration() {
+    return this.isGeneticallyFertileNeighbourhood();
+  }
+}
+```
+
+A huge benefit of this is that we also have provided ourself a safer method for adjusting the different states a call
+can be in. If we need to add a new one, we add a new class. We extend our system, rather than modify it. This is an
+example of *open-closed principle*.
+
+```javascript
+// example of a new state
+class ZombieCell {
+  isALiveInNextGeneration() {
+    // new, possibily more complex rules
+  }
+}
+```
+
+It also provides a clear method for fixing the names of our methods to match the actual concepts in our system, focusing
+on specific behaviors, rather than a generic idea of isAliceInNextGeneration().
+
+```javascript
+class LivingCell {
+  public isStayingAlive() {
+    return this.numberOfNeighbours == 2 || this.numberOfNeighbours == 3;
+  }
+}
+
+class DeadCell {
+  public isComingToLive() {
+    return this.numberOfNeighbours == 3;
+  }
+}
+```
+
+At this point, we now have very explicit statements of the intent of the types and their behaviors. But, changing these
+names takes away the polymorphism! We no longer can call a single method and have the appropriate rules applied. This is
+true. This could be an indication that the idea of having initially-desired polymorphism isn't a good design. Naturally
+it depends on how we end up using the cells, but focusing heavily on explicitness in this fashion can raise flags about
+desired or "planned" designs.
+
+</details>
