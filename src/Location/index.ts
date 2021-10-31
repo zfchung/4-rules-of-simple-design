@@ -1,15 +1,17 @@
 export class Location {
   coordinateX: number;
   coordinateY: number;
-  coordinate: number[];
 
   constructor(coordinateX: number, coordinateY: number) {
     this.coordinateX = coordinateX;
     this.coordinateY = coordinateY;
-    this.coordinate = [this.coordinateX, this.coordinateY];
   }
 
-  neighbours() {
+  public coordinate() {
+    return [this.coordinateX, this.coordinateY];
+  }
+
+  public neighbours() {
     let neighbourCoordinateList = getNeighbourCoordinates(this.coordinateX, this.coordinateY);
     return neighbourCoordinateList;
   }

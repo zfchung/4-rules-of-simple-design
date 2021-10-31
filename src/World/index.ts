@@ -1,4 +1,5 @@
 import {LivingCell} from "../LivingCell";
+import {Location} from "../Location";
 
 export class World {
   livingCells: any[];
@@ -11,9 +12,8 @@ export class World {
     return this.livingCells.length;
   }
 
-  setLivingAt(location: number[]) {
-    const newLivingCell = new LivingCell();
-    newLivingCell.positionAt(location);
+  setLivingAt(location: Location) {
+    const newLivingCell = new LivingCell(location);
     this.livingCells.push(newLivingCell);
     return newLivingCell;
   }
@@ -24,7 +24,7 @@ export class World {
     } else return false;
   }
 
-  aliveAt(location: number[]) {
+  aliveAt(location: Location) {
     const instanceAtLocationExists = this.setLivingAt(location) instanceof LivingCell;
     return instanceAtLocationExists;
   }
