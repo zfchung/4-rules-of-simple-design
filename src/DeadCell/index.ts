@@ -8,12 +8,7 @@ export class DeadCell extends Cell {
     super();
   }
 
-  public isAliveInNextGeneration() {
-    return this.isGeneticallyFertileNeighbourhood();
-  }
-
-  private isGeneticallyFertileNeighbourhood() {
+  public isComingToLife() {
     return this.numberOfNeighbours == 3;
   }
-
 }

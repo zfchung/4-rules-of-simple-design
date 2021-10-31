@@ -12,11 +12,7 @@ export class LivingCell extends Cell {
     return this.location.coordinate();
   }
 
-  public isAliveInNextGeneration() {
-    return this.isStableNeighborhood();
-  }
-
-  private isStableNeighborhood() {
+  public isStayingAlive() {
     return this.numberOfNeighbours == 2 || this.numberOfNeighbours == 3;
   }
 }
