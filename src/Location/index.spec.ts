@@ -12,7 +12,16 @@ describe("Testing Location class", () => {
     (0,1) (1,1) (2,1)
     (0,2) (1,2) (2,2)
     */
-    const expectedResult = [[0, 0], [1, 0], [2, 0], [0, 1], [2, 1], [0, 2], [1, 2], [2, 2]]
-    expect(location.neighbours()).toEqual(expect.arrayContaining(expectedResult));
+    const expectedResult = [
+      new Location(0, 0),
+      new Location(1, 0),
+      new Location(2, 0),
+      new Location(0, 1),
+      new Location(2, 1),
+      new Location(0, 2),
+      new Location(1, 2),
+      new Location(2, 2),
+    ]
+    expect(location.getNeighbours()).toEqual(expect.arrayContaining(expectedResult));
   })
 })

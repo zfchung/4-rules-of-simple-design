@@ -1,29 +1,26 @@
 export class Location {
-  coordinateX: number;
-  coordinateY: number;
 
-  constructor(coordinateX: number, coordinateY: number) {
-    this.coordinateX = coordinateX;
-    this.coordinateY = coordinateY;
+  constructor(private coordinateX: number, private coordinateY: number) {
   }
 
   public coordinate() {
     return [this.coordinateX, this.coordinateY];
   }
 
-  public neighbours() {
-    let neighbourCoordinateList = getNeighbourCoordinates(this.coordinateX, this.coordinateY);
+  public getNeighbours(): Location[] {
+    const neighbourCoordinateList = getNeighbourCoordinates(this.coordinateX, this.coordinateY);
     return neighbourCoordinateList;
   }
 
 }
 
-function getNeighbourCoordinates(coordinateX: number, coordinateY: number) {
-  let coordinateList = [];
+function getNeighbourCoordinates(coordinateX: number, coordinateY: number): Location[] {
+  const coordinateList: Location[] = [];
+
   for (let x = (coordinateX - 1); x <= (coordinateX + 1); x++) {
     for (let y = (coordinateY - 1); y <= (coordinateY + 1); y++) {
-      let neighbourCoordinate = [x, y];
-      if (x !== 1 || y !== 1) {
+      if (x !== coordinateX || y !== coordinateY) {
+        const neighbourCoordinate = new Location(x, y);
         coordinateList.push(neighbourCoordinate);
       }
     }
