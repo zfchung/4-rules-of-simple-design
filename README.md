@@ -163,7 +163,9 @@ Guideline: There must be an explicitly named builder method on the class to crea
 
 </details>
 
-### Breaking Abstraction Level
+### Breaking Abstraction Level [review required]
+
+- Code sample using Jest Mock required
 
 <details>
 <summary>Click to expand!</summary>
@@ -196,6 +198,9 @@ it("should be not empty after adding a new cell", () => {
 </details>
 
 ### Naive Duplication
+
+<details>
+<summary>Click to expand!</summary>
 
 ```javascript
 export class Cell {
@@ -239,3 +244,6 @@ export class Cell {
   }
 }
 ```
+
+</details>
+
