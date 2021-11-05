@@ -339,3 +339,111 @@ it depends on how we end up using the cells, but focusing heavily on explicitnes
 desired or "planned" designs.
 
 </details>
+
+### Inverted Composition as a Replacement for Inheritance
+
+```typescript
+class LivingCell {
+  constructor(public location: Location) {
+  }
+}
+
+class DeadCell {
+  constructor(public location: Location) {
+  }
+}
+```
+
+A common attempt to eliminate duplication is to jump to inheritance. We could do something like the following
+
+```typescript
+class Cell {
+  constructor(public location: Location) {
+  }
+}
+
+class LivingCell extends Cell {
+  constructor() {
+    super();
+  }
+}
+
+class DeadCell extends Cell {
+  constructor() {
+    super();
+  }
+}
+```
+
+Now it does seem to simplify our code a bit if we think in terms of lines of code, But, is it really simpler? It does
+add another type (Cell) after all. Having more classes isn't bad, as long as they are the correct abstractions. But,
+this extraction does not introduce a new domain concept; this abstraction increases the complexity without adding
+additional information about our domain. This feels like a violation of the fourth rule: "small"; think "Have I
+extracted too far?".
+
+Inheritance is often used as way of creating "reuse" rather than eliminating duplication. We are assuming that both the
+LivingCell and DeadCell need to have access to their location (do they?), so we provide access through the base calss.
+Even if we support our assumption, however, the objects don't need access to their location necessarily, they really
+would need access to the behaviors that the location object exposes. And, of course, at this point, we have not even
+talked about whether they truly do.
+
+So, let's ask again: is it really eliminating duplication? The location attribute is still there on the objects. Our two
+different types still contain the same knowledge.
+
+Base classes of this nature, extracted entirely to eliminate apparent duplication can have tendency to hide actual
+duplication. Also, it is very common for these base classes to become buckets of unrelated behavior.
+
+So, if inheritance is not really eliminating the knowledge, what other options do we have? Let's look at what we are
+trying to accomplish. Our goal is to have a link between the Cell and the Location it is at. Or, rather, our system
+needs to know this link. We haven't actually seen anything to indicate the Cell classes, themselves, need the link. Our
+assumption here is that something needs to see the link.
+
+When having two types containing a link to the same type (Living|Dead)Cell and Location, a useful technique is to
+reverse the dependency.
+
+```typescript
+class Location {
+  constructor(public coordinateX: int, public coordinateY: int, public cell: Cell) {
+  }
+}
+
+class LivingCell extends Cell {
+  constructor() {
+    super();
+  }
+
+  public isStayingAlive() {
+    return this.numberOfNeighbours == 2 || this.numberOfNeighbours == 3;
+  }
+}
+
+class DeadCell extends Cell {
+  constructor() {
+    super();
+  }
+
+  public isComingToLife() {
+    return this.numberOfNeighbours == 3;
+  }
+}
+```
+
+At this point, our cell classes are indeed just focused on information related to the cell (for example, rules). The
+topology is also further abstracted from the rules of the game. We can start to see that the Location class is taking on
+a structural role, providing the link between the topology and the cell that exists there. The cell classes are now
+focused on rules around evolution.
+
+While the refactoring is good, it highlights a potential naming issue. Is Location is the correct name for this class?
+From a reading point of view, it seems like a Cell should have Location, not the other way around. This is arguable, of
+course, but it seems like potentially we chose the wrong name for the Location class. Perhaps it is better as a
+Coordinate.
+
+```typescript
+class Coordinate {
+  constructor(public coordinateX: int, public coordinateY: int) {
+  }
+}
+```
+
+Eliminating the duplication highlighted a possible naming issue. This is a good example of how applying these rules can
+often lead to other refactoring opportunities and insight into our design.
